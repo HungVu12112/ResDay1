@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Note" android:id="@+id/note" android:icon="@drawable/note_icon"/>
+    <item android:title="Calendar" android:id="@+id/calendar" android:icon="@drawable/calendar_icon"/>
+    <item android:title="Archived" android:id="@+id/archived" android:icon="@drawable/archive_icon"/>
+    <item android:title="Deleted" android:id="@+id/deleted" android:icon="@drawable/delete_icon_" />
+    <item android:title="Deleted" android:id="@+id/groups" android:icon="@drawable/goups" />
+
+</menu>
