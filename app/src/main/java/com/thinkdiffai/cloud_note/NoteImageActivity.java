@@ -161,7 +161,7 @@ public class NoteImageActivity extends AppCompatActivity {
                 obj.setDuaAt("");
                 obj.setReminAt("");
                 if (imageBase64 != "") {
-                    AsyncTask<Void, Void, String> async = new AsyncTask<Void, Void, String>() {
+                    @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, String> async = new AsyncTask<Void, Void, String>() {
                         @Override
                         protected String doInBackground(Void... voids) {
                             return img();
@@ -289,8 +289,8 @@ public class NoteImageActivity extends AppCompatActivity {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
-                        "com.example.cloud_note.fileprovider",
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.thinkdiffai.cloud_note.fileprovider",
                         photoFile);
 
 
