@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="441dp"
+        android:layout_height="313dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="-27px"
+        android:layout_marginTop="217dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_below="@+id/img_logo"
+        android:textFontWeight="800"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_width="250dp"
+        android:layout_height="43dp"
+        android:textStyle="bold"
+        android:lineHeight="49.03dp"
+        android:text="SAMNOTES"
+        android:textColor="#6A53CC"
+        android:textAlignment="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="38dp"/>
+
+    <RelativeLayout
+        android:layout_width="293dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="772dp">
+        <RelativeLayout
+            android:layout_width="273dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            >
+            <TextView
+                android:id="@+id/txt_Coppyright"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_width="273dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textFontWeight="400"
+                android:textSize="14dp"
+                android:lineHeight="14.64dp"
+                android:text="Copyright DevSenior"
+                android:layout_centerHorizontal="true"
+                />
+            <RelativeLayout
+                android:layout_width="172dp"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="50.5dp"
+                >
+
+                <TextView
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:lineHeight="14.64dp"
+                    android:text="Give feedback"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="6dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="88dp"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="."
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Learn more"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="12dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="100dp"
+                    android:lineHeight="14.46dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

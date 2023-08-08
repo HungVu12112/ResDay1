@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Add_new_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add new note"
+        android:gravity="center"
+        android:textColor="#993C3C43"
+        android:padding="12dp"
+        android:textSize="15dp"
+        android:fontFamily="@font/roboto_medium"
+        android:background="@drawable/custom_header_radius" />
+
+    <Button
+        android:id="@+id/btn_new_text_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:text="Text Note"
+        android:fontFamily="@font/roboto_medium"
+        android:textAllCaps="false"
+        android:textColor="#007AFF"
+        android:textSize="20dp"
+        android:padding="20dp"
+        />
+    <Button
+        android:id="@+id/btn_new_checked_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:text="Checklist"
+        android:fontFamily="@font/roboto_medium"
+        android:textAllCaps="false"
+        android:textColor="#007AFF"
+        android:textSize="20dp"
+        android:padding="20dp"
+        />
+    <Button
+        android:id="@+id/btn_new_image_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:text="Image"
+        android:fontFamily="@font/roboto_medium"
+        android:textAllCaps="false"
+        android:textColor="#007AFF"
+        android:textSize="20dp"
+        android:padding="20dp"
+        />
+    <Button
+        android:id="@+id/btn_Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_cancel"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Cancel"
+        android:fontFamily="@font/roboto_medium"
+        android:textAllCaps="false"
+        android:textColor="#007AFF"
+        android:textSize="20dp"
+        android:padding="20dp"
+        android:elevation="10dp"
+        android:layout_marginTop="6dp"
+        />
+
+</LinearLayout>

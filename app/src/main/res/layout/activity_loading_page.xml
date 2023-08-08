@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="441dp"
+        android:layout_height="313dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="88dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tt_nameApp"
+        android:textFontWeight="800"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_width="250dp"
+        android:layout_height="43dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/img_logo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:lineHeight="49.03dp"
+        android:text="SAMNOTES"
+        android:textAlignment="center"
+        android:textColor="#6A53CC"
+        android:textSize="38dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_below="@+id/tt_nameApp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="Login "
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_Signin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_below="@+id/btn_login"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="SignIn"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_user_guest"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_below="@+id/btn_Signin"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="User As Guest"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="293dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="273dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="172dp"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="21dp"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:lineHeight="14.64dp"
+                    android:text="Give feedback"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="6dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="88dp"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="."
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Learn more"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="12dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="100dp"
+                    android:lineHeight="14.46dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
