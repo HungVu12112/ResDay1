@@ -67,6 +67,7 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="100dp">
         <RelativeLayout
+            android:id="@+id/Rl_Reminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -85,6 +86,7 @@
                 android:layout_marginLeft="40dp" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/Rl_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
@@ -105,6 +107,7 @@
                 android:layout_marginLeft="40dp" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/Rl_lock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
@@ -124,6 +127,7 @@
                 android:layout_marginLeft="40dp" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/Rl_archive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
@@ -143,6 +147,7 @@
                 android:layout_marginLeft="40dp" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/Rl_deletenote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
