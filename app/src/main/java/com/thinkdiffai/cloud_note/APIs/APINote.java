@@ -107,6 +107,9 @@ public interface APINote {
     })
     Observable<ModelReturn> patch_text_note(@Path("id") int id, @Body ModelPutTextNote modelPutTextNote);
 
+
+
+
     @PATCH("notes/{id}")
     @Headers({
             "Content-type: Application/json"
