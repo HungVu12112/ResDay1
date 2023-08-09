@@ -74,6 +74,9 @@ public class CheckedList_Activity extends AppCompatActivity {
     Model_State_Login user;
     KProgressHUD isloading;
 
+    private ImageButton red,orange,yellow,green1,green2,mint,blue,purple;
+    private RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +157,19 @@ public class CheckedList_Activity extends AppCompatActivity {
         imgDateCreate = (ImageView) findViewById(R.id.img_dateCreate);
         tvTimeCreate = (TextView) findViewById(R.id.tv_timeCreate);
         imgTimeCreate = (ImageView) findViewById(R.id.img_timeCreate);
+        red = findViewById(R.id.color_red);
+        orange = findViewById(R.id.color_orange);
+        yellow = findViewById(R.id.color_yellow);
+        green1 = findViewById(R.id.color_green1);
+        green2 = findViewById(R.id.color_green2);
+        mint = findViewById(R.id.color_mint);
+        blue = findViewById(R.id.color_blue);
+        purple = findViewById(R.id.color_purple);
+        Rl_reminder = findViewById(R.id.Rl_Reminder);
+        Rl_share = findViewById(R.id.Rl_share);
+        Rl_lock = findViewById(R.id.Rl_lock);
+        Rl_archive = findViewById(R.id.Rl_archive);
+        nhanMau();
     }
 
 
@@ -374,5 +390,72 @@ public class CheckedList_Activity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+    private void nhanMau(){
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FF7D7D";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        orange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FFBC7D";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        yellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FAE28C";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        green1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#D3EF82";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        green2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#A5EF82";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        mint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#82EFBB";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#82C8EF";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        purple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#8293EF";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+
+            }
+        });
     }
 }
