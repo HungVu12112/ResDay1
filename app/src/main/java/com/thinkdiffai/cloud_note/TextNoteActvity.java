@@ -59,6 +59,8 @@ public class TextNoteActvity extends AppCompatActivity {
     private TextView tvTimeCreate;
     private ImageView imgTimeCreate;
     private String color_background = "#8FD2EF";
+    private ImageButton red, orange, yellow, green1, green2, mint, blue, purple;
+    private RelativeLayout Rl_reminder, Rl_share, Rl_lock, Rl_archive;
     ModelReturn MmodelReturn;
 
     com.thinkdiffai.cloud_note.Model.Color objColor;
@@ -66,8 +68,6 @@ public class TextNoteActvity extends AppCompatActivity {
     Model_State_Login user;
     KProgressHUD isloading;
 
-        private ImageButton red,orange,yellow,green1,green2,mint,blue,purple;
-        private RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -140,7 +140,7 @@ public class TextNoteActvity extends AppCompatActivity {
                 Date = simpleDateFormat.format(date);
                 ModelTextNotePost obj = new ModelTextNotePost();
                 obj.setColor(chuyenMau(color_background));
-                Log.e("TAG", "onClick:Color: "+chuyenMau(color_background).getA()+":"+chuyenMau(color_background).getR()+":"+chuyenMau(color_background).getG()+":"+chuyenMau(color_background).getB()+":");
+                Log.e("TAG", "onClick:Color: " + chuyenMau(color_background).getA() + ":" + chuyenMau(color_background).getR() + ":" + chuyenMau(color_background).getG() + ":" + chuyenMau(color_background).getB() + ":");
                 obj.setTitle(title_values);
                 obj.setData(content_values);
                 obj.setType("text");
@@ -149,13 +149,13 @@ public class TextNoteActvity extends AppCompatActivity {
                 obj.setLock("");
                 obj.setReminAt("");
                 obj.setShare("");
-                if (obj.getTitle() != null && obj.getData() != null) {
+                if (obj.getTitle() != "" && obj.getData() != "") {
                     postTextNote(obj);
                 } else {
-                    if (obj.getTitle() == null) {
+                    if (obj.getTitle() == "") {
                         Toast.makeText(TextNoteActvity.this, "Title không được để trống", Toast.LENGTH_SHORT).show();
                     }
-                    if (obj.getData() == null) {
+                    if (obj.getData() == "") {
                         Toast.makeText(TextNoteActvity.this, "Content không được để trống", Toast.LENGTH_SHORT).show();
                     }
 
@@ -202,7 +202,7 @@ public class TextNoteActvity extends AppCompatActivity {
 
 
     public void postTextNote(ModelTextNotePost obj) {
-isloading.show();
+        isloading.show();
         APINote.apiService.post_text_note(user.getIdUer(), obj)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -367,13 +367,13 @@ isloading.show();
     }
 
     public com.thinkdiffai.cloud_note.Model.Color chuyenMau(String hexColor) {
-        Log.e("TAG", "chuyenMau: "+hexColor);
+        Log.e("TAG", "chuyenMau: " + hexColor);
         int red = Integer.parseInt(hexColor.substring(1, 3), 16);
         int green = Integer.parseInt(hexColor.substring(3, 5), 16);
         int blue = Integer.parseInt(hexColor.substring(5, 7), 16);
-        Log.e("TAG", "chuyenMau:R "+red);
-        Log.e("TAG", "chuyenMau: G"+green);
-        Log.e("TAG", "chuyenMau: B"+blue);
+        Log.e("TAG", "chuyenMau:R " + red);
+        Log.e("TAG", "chuyenMau: G" + green);
+        Log.e("TAG", "chuyenMau: B" + blue);
         com.thinkdiffai.cloud_note.Model.Color color = new com.thinkdiffai.cloud_note.Model.Color();
         color.setA((float) 0.87);
         color.setB(blue);
@@ -381,7 +381,8 @@ isloading.show();
         color.setR(red);
         return color;
     }
-    private void nhanMau(){
+
+    private void nhanMau() {
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -394,7 +395,6 @@ isloading.show();
             @Override
             public void onClick(View view) {
                 color_background = "#FFBC7D";
-
                 cardView.setCardBackgroundColor(Color.parseColor(color_background));
             }
         });

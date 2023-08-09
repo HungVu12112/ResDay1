@@ -48,18 +48,20 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="right"
+    android:gravity="center"
     android:orientation="horizontal">
     <Button
+        android:layout_weight="1"
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_marginRight="5dp"
         android:backgroundTint="@color/white"
         android:textColor="#0088F7"/>
     <Button
         android:id="@+id/btn_delete"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
@@ -67,6 +69,7 @@
         android:backgroundTint="@color/white"
         android:textColor="#0088F7"/>
     <Button
+        android:layout_weight="1"
         android:id="@+id/btn_move_trash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

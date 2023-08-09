@@ -8,8 +8,8 @@
 
     <ImageButton
         android:id="@+id/btn_add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="70dp"
         android:elevation="10dp"
@@ -17,8 +17,6 @@
         android:background="@drawable/border_cryle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/bottombar" />
-
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

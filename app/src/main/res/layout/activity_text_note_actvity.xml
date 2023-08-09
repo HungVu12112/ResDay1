@@ -300,7 +300,8 @@
                 android:id="@+id/Rl_archive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp">
 
                 <ImageButton
                     android:layout_width="20dp"
@@ -311,27 +312,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Archive"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="40dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/Rl_deletenote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp">
-
-                <ImageButton
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/delete" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delete note"
                     android:textSize="15dp"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="@color/black"

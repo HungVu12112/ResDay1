@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,11 +18,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.cloud_note.R;
@@ -30,6 +34,7 @@ import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
 import com.thinkdiffai.cloud_note.Model.Model_List_Note;
 import com.thinkdiffai.cloud_note.Model.PATCH.ModelPutTextNote;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.github.rupinderjeet.kprogresshud.KProgressHUD;
@@ -165,15 +170,15 @@ KProgressHUD isloading;
                             update.setLock("");
                             update.setReminAt("");
                             update.setPinned(0);
-                            if(tvDateCreate.getText().toString()==""&&tvTimeCreate.getText().toString()==""){
-                                if(obj.getModelTextNote().getDuaAt()==""){
-                                    update.setDuaAt("");
-                                }else{
-                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
-                                }
-                            }else{
-                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
-                            }
+//                            if(tvDateCreate.getText().toString()==""&&tvTimeCreate.getText().toString()==""){
+//                                if(obj.getModelTextNote().getDuaAt()==""){
+//                                    update.setDuaAt("");
+//                                }else{
+//                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
+//                                }
+//                            }else{
+//                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
+//                            }
                             updateNodeTextNote(update, idNote);
                         }
                     });
@@ -187,9 +192,18 @@ KProgressHUD isloading;
                 isloading.dismiss();
             }
         });
-
-
-
+        imgDateCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogDate();
+            }
+        });
+        imgTimeCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogTime();
+            }
+        });
         Back();
 
 //        OpenMenu();
@@ -522,4 +536,73 @@ KProgressHUD isloading;
             }
         });
     }
+    public void dialogDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Detail_Note.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int days = dayOfMonth;
+                int months = month;
+                int years = year;
+                tvDateCreate.setText(days + "-" + (months + 1) + "-" + years);
+            }
+        }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+    public void dialogTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(Detail_Note.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                int hour = i;
+                int minute = i1;
+                tvTimeCreate.setText(hour + ":" + minute);
+            }
+        }, hourOfDay, minute, false);
+        timePickerDialog.show();
+    }
+    public void dialogArchived(){
+        final Dialog dialog1 = new Dialog(this);
+        dialog1.setContentView(R.layout.dialog_confirm);
+        Button btn_cancel = dialog1.findViewById(R.id.btn_cancle);
+        Button btn_confirm = dialog1.findViewById(R.id.btn_confirm);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog1.dismiss();
+            }
+        });
+//        btn_confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                APINote.apiService.deleteNote().enqueue(new Callback<ModelReturn>() {
+//                    @Override
+//                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+//                        if (response.isSuccessful() & response.body() != null) {
+//                            ModelReturn r = response.body();
+//                            if (r.getStatus() == 200) {
+//                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+//                                dialog1.dismiss();
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+//                        Log.e("TAG", "onFailure: " + t.getMessage());
+//                    }
+//                });
+//                onBackPressed();
+//            }
+//        });
+    }
+
 }

@@ -32,6 +32,7 @@ import com.thinkdiffai.cloud_note.Model.GET.ModelGetImageNote;
 import com.thinkdiffai.cloud_note.Model.GET.ModelGetNoteText;
 import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
 import com.thinkdiffai.cloud_note.Model.Model_List_Note;
+import com.thinkdiffai.cloud_note.TextNoteActvity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

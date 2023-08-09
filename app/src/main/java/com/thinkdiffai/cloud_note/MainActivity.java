@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.groups).setChecked(true);
-                        btnAdd.setVisibility(View.INVISIBLE);
+                        btnAdd.setVisibility(View.VISIBLE);
                         break;
                     default:
                         bottomNavigationView.getMenu().findItem(R.id.note).setChecked(true);
@@ -116,23 +116,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.note:
                         viewpager2.setCurrentItem(0);
-                        btnAdd.setVisibility(View.VISIBLE);
+                        btnAdd.setImageResource(R.drawable.add);
                         return true;
                     case R.id.calendar:
                         viewpager2.setCurrentItem(1);
-                        btnAdd.setVisibility(View.VISIBLE);
+                        btnAdd.setImageResource(R.drawable.add);
                         return true;
                     case R.id.archived:
                         viewpager2.setCurrentItem(2);
-                        btnAdd.setVisibility(View.VISIBLE);
+                        btnAdd.setImageResource(R.drawable.add);
                         return true;
                     case R.id.deleted:
                         viewpager2.setCurrentItem(3);
-                        btnAdd.setVisibility(View.VISIBLE);
+                        btnAdd.setImageResource(R.drawable.add);
                         return true;
                     case  R.id.groups:
                         viewpager2.setCurrentItem(4);
-                        btnAdd.setVisibility(View.INVISIBLE);
+                        btnAdd.setImageResource(R.drawable.new_group);
                         return true;
                 }
                 return false;
