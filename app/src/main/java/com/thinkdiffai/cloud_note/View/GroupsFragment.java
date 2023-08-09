@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.cloud_note.R;
 
-public class GroupsFragment extends Fragment {
+class GroupsFragment extends Fragment {
     Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
