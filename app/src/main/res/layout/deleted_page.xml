@@ -57,6 +57,7 @@
                     android:id="@+id/search"
                     android:iconifiedByDefault="false"
                     android:queryHint="Search"
+
                     />
             </androidx.cardview.widget.CardView>
 

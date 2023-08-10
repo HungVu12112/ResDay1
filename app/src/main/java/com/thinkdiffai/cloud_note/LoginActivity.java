@@ -84,7 +84,9 @@ private static final String TAG="LoginActivity";
                     }
                     if (inputPasswd.getEditText().getText().toString().isEmpty()) {
                         inputPasswd.setError("Password không được để trống");
+
                         edtemail.requestFocus();
+
                     } else {
                         inputPasswd.setError("");
                     }

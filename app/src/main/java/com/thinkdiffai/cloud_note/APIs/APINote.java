@@ -99,6 +99,7 @@ public interface APINote {
             "Content-type: Application/json"
     })
     Observable<ModelReturn> post_image_note(@Path("id") int id , @Body ModelPostImageNote modelPostImageNote);
+
     @PATCH("notes/{id}")
     @Headers({
             "Content-type: Application/json"

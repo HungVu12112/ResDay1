@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg3"
-    tools:context=".TextNoteActvity">
+    android:background="@drawable/bg3">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="23dp"
         android:layout_marginTop="140dp"
+
         app:cardBackgroundColor="#8FD2EF"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp"

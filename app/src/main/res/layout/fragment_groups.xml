@@ -56,8 +56,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/search"
                     android:iconifiedByDefault="false"
-                    android:queryHint="Search"
-                    />
+                    android:queryHint="Search"/>
             </androidx.cardview.widget.CardView>
 
 

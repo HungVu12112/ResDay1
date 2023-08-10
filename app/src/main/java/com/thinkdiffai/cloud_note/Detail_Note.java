@@ -5,6 +5,9 @@ import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.cloud_note.R;
@@ -25,6 +36,12 @@ import com.thinkdiffai.cloud_note.APIs.APINote;
 import com.thinkdiffai.cloud_note.Model.GET.ModelGetNoteText;
 import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
 import com.thinkdiffai.cloud_note.Model.PATCH.ModelPutTextNote;
+
+import com.thinkdiffai.cloud_note.Model.Model_List_Note;
+import com.thinkdiffai.cloud_note.Model.PATCH.ModelPutTextNote;
+
+import java.util.Calendar;
+import java.util.List;
 
 import io.github.rupinderjeet.kprogresshud.KProgressHUD;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -48,6 +65,8 @@ public class Detail_Note extends AppCompatActivity {
     private ImageView imgDateCreate;
     private TextView tvTimeCreate;
     private ImageView imgTimeCreate;
+    List<Model_List_Note> list;
+
 
     //Luu tru gia tri duoc gui boi bundle
 
@@ -57,6 +76,7 @@ public class Detail_Note extends AppCompatActivity {
     int colorG;
     int colorB;
     int notePublic;
+
 
 
     //Database
@@ -82,6 +102,7 @@ KProgressHUD isloading;
         imgTimeCreate = (ImageView) findViewById(R.id.img_timeCreate);
 
         getData(intent);
+
         if(notePublic==0){
             done.setVisibility(View.VISIBLE);
             menu.setVisibility(View.VISIBLE);
@@ -141,6 +162,7 @@ KProgressHUD isloading;
                             }else{
                                 update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
                             }
+
                             updateNodeTextNote(update, idNote);
                         }
                     });
@@ -154,13 +176,11 @@ KProgressHUD isloading;
                 isloading.dismiss();
             }
         });
-
-
-
         Back();
 
         OpenMenu();
     }
+
     private void getData(Intent intent){
         idNote = intent.getIntExtra("id", -1);
         colorA = intent.getFloatExtra("colorA",0);
@@ -272,6 +292,12 @@ KProgressHUD isloading;
             dialog.setCancelable(false);
         }
         //Ánh xạ
+        RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
+        Rl_reminder = dialog.findViewById(R.id.Rl_Reminder);
+        Rl_share = dialog.findViewById(R.id.Rl_share);
+        Rl_lock = dialog.findViewById(R.id.Rl_lock);
+        Rl_archive = dialog.findViewById(R.id.Rl_archive);
+        Rl_deletenote = dialog.findViewById(R.id.Rl_deletenote);
         ImageButton red = dialog.findViewById(R.id.color_red);
         ImageButton orange = dialog.findViewById(R.id.color_orange);
         ImageButton yellow = dialog.findViewById(R.id.color_yellow);
@@ -280,6 +306,14 @@ KProgressHUD isloading;
         ImageButton mint = dialog.findViewById(R.id.color_mint);
         ImageButton blue = dialog.findViewById(R.id.color_blue);
         ImageButton purple = dialog.findViewById(R.id.color_purple);
+
+        Rl_deletenote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogDelete(idNote);
+            }
+        });
+
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -346,4 +380,137 @@ KProgressHUD isloading;
         });
         dialog.show();
     }
+
+    private void dialogDelete( int id) {
+       final Dialog dialog1 = new Dialog(this);
+        dialog1.setContentView(R.layout.dialog_delete_note);
+        Button btn_cancel = dialog1.findViewById(R.id.btn_cancel);
+        Button btn_delete = dialog1.findViewById(R.id.btn_delete);
+        Button btn_move_trash = dialog1.findViewById(R.id.btn_move_trash);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog1.dismiss();
+            }
+        });
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APINote.apiService.deleteNote(id).enqueue(new Callback<ModelReturn>() {
+                    @Override
+                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+                        if (response.isSuccessful() & response.body() != null) {
+                            ModelReturn r = response.body();
+                            if (r.getStatus() == 200) {
+                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+                onBackPressed();
+            }
+        });
+        btn_move_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APINote.apiService.moveToTrash(id).enqueue(new Callback<ModelReturn>() {
+                    @Override
+                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+                        if (response.isSuccessful() & response.body() != null) {
+                            ModelReturn r = response.body();
+                            if (r.getStatus() == 200) {
+                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+                onBackPressed();
+            }
+
+        });
+        dialog1.show();
+    }
+    public void dialogDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Detail_Note.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int days = dayOfMonth;
+                int months = month;
+                int years = year;
+                tvDateCreate.setText(days + "-" + (months + 1) + "-" + years);
+            }
+        }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+    public void dialogTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(Detail_Note.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                int hour = i;
+                int minute = i1;
+                tvTimeCreate.setText(hour + ":" + minute);
+            }
+        }, hourOfDay, minute, false);
+        timePickerDialog.show();
+    }
+    public void dialogArchived(){
+        final Dialog dialog1 = new Dialog(this);
+        dialog1.setContentView(R.layout.dialog_confirm);
+        Button btn_cancel = dialog1.findViewById(R.id.btn_cancle);
+        Button btn_confirm = dialog1.findViewById(R.id.btn_confirm);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog1.dismiss();
+            }
+        });
+//        btn_confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                APINote.apiService.deleteNote().enqueue(new Callback<ModelReturn>() {
+//                    @Override
+//                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+//                        if (response.isSuccessful() & response.body() != null) {
+//                            ModelReturn r = response.body();
+//                            if (r.getStatus() == 200) {
+//                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+//                                dialog1.dismiss();
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+//                        Log.e("TAG", "onFailure: " + t.getMessage());
+//                    }
+//                });
+//                onBackPressed();
+//            }
+//        });
+    }
+
 }

@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.example.cloud_note.R;
 import com.thinkdiffai.cloud_note.APIs.APINote;
 import com.thinkdiffai.cloud_note.Adapter.AdapterCheckListPost;
@@ -153,6 +152,7 @@ public class CheckedList_Activity extends AppCompatActivity {
         imgDateCreate = (ImageView) findViewById(R.id.img_dateCreate);
         tvTimeCreate = (TextView) findViewById(R.id.tv_timeCreate);
         imgTimeCreate = (ImageView) findViewById(R.id.img_timeCreate);
+
     }
 
 
@@ -374,4 +374,5 @@ public class CheckedList_Activity extends AppCompatActivity {
         });
         dialog.show();
     }
+
 }

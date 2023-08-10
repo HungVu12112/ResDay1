@@ -19,6 +19,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -58,6 +61,7 @@ public class TextNoteActvity extends AppCompatActivity {
     private TextView tvTimeCreate;
     private ImageView imgTimeCreate;
     private String color_background = "#8FD2EF";
+
     ModelReturn MmodelReturn;
 
     com.thinkdiffai.cloud_note.Model.Color objColor;
@@ -124,6 +128,7 @@ public class TextNoteActvity extends AppCompatActivity {
                 ModelTextNotePost obj = new ModelTextNotePost();
                 obj.setColor(chuyenMau(color_background));
                 Log.e("TAG", "onClick:Color: "+chuyenMau(color_background).getA()+":"+chuyenMau(color_background).getR()+":"+chuyenMau(color_background).getG()+":"+chuyenMau(color_background).getB()+":");
+
                 obj.setTitle(title_values);
                 obj.setData(content_values);
                 obj.setType("text");
@@ -139,6 +144,7 @@ public class TextNoteActvity extends AppCompatActivity {
                         Toast.makeText(TextNoteActvity.this, "Title không được để trống", Toast.LENGTH_SHORT).show();
                     }
                     if (obj.getData() == null) {
+
                         Toast.makeText(TextNoteActvity.this, "Content không được để trống", Toast.LENGTH_SHORT).show();
                     }
 
@@ -201,7 +207,6 @@ isloading.show();
                     }
 
                     @Override
-
                     public void onError(@NonNull Throwable e) {
                         Log.e("TAG", "onError: " + e);
                         isloading.dismiss();
@@ -244,6 +249,9 @@ isloading.show();
         final Dialog dialog = new Dialog(this);
         //Truyền layout cho dialog.
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.requestWindowFeature(Window.FEATURE_ACTION_BAR);
+
         dialog.setContentView(R.layout.custom_select_color);
 
         //Xác định vị trí cho dialog
@@ -350,6 +358,7 @@ isloading.show();
     }
 
     public com.thinkdiffai.cloud_note.Model.Color chuyenMau(String hexColor) {
+
         Log.e("TAG", "chuyenMau: "+hexColor);
         int red = Integer.parseInt(hexColor.substring(1, 3), 16);
         int green = Integer.parseInt(hexColor.substring(3, 5), 16);
@@ -357,6 +366,7 @@ isloading.show();
         Log.e("TAG", "chuyenMau:R "+red);
         Log.e("TAG", "chuyenMau: G"+green);
         Log.e("TAG", "chuyenMau: B"+blue);
+
         com.thinkdiffai.cloud_note.Model.Color color = new com.thinkdiffai.cloud_note.Model.Color();
         color.setA((float) 0.87);
         color.setB(blue);

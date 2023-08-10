@@ -82,7 +82,6 @@ public class HomeActivity extends AppCompatActivity {
     private void getListUser() {
         isLoading.show();
         APINote.apiService.getListLastUser().enqueue(new Callback<ModelListLastUser>() {
-
             @Override
             public void onResponse(Call<ModelListLastUser> call, Response<ModelListLastUser> response) {
                 if (response.isSuccessful() && response.body() != null) {
