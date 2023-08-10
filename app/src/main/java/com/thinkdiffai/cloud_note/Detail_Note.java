@@ -1,18 +1,23 @@
 package com.thinkdiffai.cloud_note;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -28,6 +33,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.cloud_note.R;
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.vision.text.TextRecognizer;
 import com.thinkdiffai.cloud_note.APIs.APINote;
 import com.thinkdiffai.cloud_note.Model.GET.ModelGetNoteText;
 import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
@@ -45,8 +53,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class Detail_Note extends AppCompatActivity {
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageButton back;
     private ImageButton done;
     private EditText title;
@@ -70,12 +78,9 @@ public class Detail_Note extends AppCompatActivity {
     int colorB;
     int notePublic;
 
-    private ImageButton red,orange,yellow,green1,green2,mint,blue,purple;
-    private RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
-
 
     //Database
-KProgressHUD isloading;
+    KProgressHUD isloading;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -95,43 +100,20 @@ KProgressHUD isloading;
         imgDateCreate = (ImageView) findViewById(R.id.img_dateCreate);
         tvTimeCreate = (TextView) findViewById(R.id.tv_timeCreate);
         imgTimeCreate = (ImageView) findViewById(R.id.img_timeCreate);
-
-        red = findViewById(R.id.color_red);
-        orange = findViewById(R.id.color_orange);
-        yellow = findViewById(R.id.color_yellow);
-        green1 = findViewById(R.id.color_green1);
-        green2 = findViewById(R.id.color_green2);
-        mint = findViewById(R.id.color_mint);
-        blue = findViewById(R.id.color_blue);
-        purple = findViewById(R.id.color_purple);
-        Rl_reminder = findViewById(R.id.Rl_Reminder);
-        Rl_share = findViewById(R.id.Rl_share);
-        Rl_lock = findViewById(R.id.Rl_lock);
-        Rl_archive = findViewById(R.id.Rl_archive);
-        Rl_deletenote = findViewById(R.id.Rl_deletenote);
-        nhanMau();
         getData(intent);
 
-
-        Rl_deletenote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ////
-                dialogDelete(idNote);
-            }
-        });
-        if(notePublic==0){
+        if (notePublic == 0) {
             done.setVisibility(View.VISIBLE);
             menu.setVisibility(View.VISIBLE);
             title.setEnabled(true);
             content.setEnabled(true);
-        }else{
+        } else {
             done.setVisibility(View.INVISIBLE);
             title.setEnabled(false);
             content.setEnabled(false);
             menu.setVisibility(View.VISIBLE);
         }
-        isloading= new KProgressHUD(Detail_Note.this)
+        isloading = new KProgressHUD(Detail_Note.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
                 .setDetailsLabel("")
@@ -143,7 +125,7 @@ KProgressHUD isloading;
             @Override
             public void onResponse(Call<ModelGetNoteText> call, Response<ModelGetNoteText> response) {
                 isloading.show();
-                if(response.isSuccessful()&response.body()!=null){
+                if (response.isSuccessful() & response.body() != null) {
                     isloading.dismiss();
                     ModelGetNoteText obj = response.body();
                     ModelPutTextNote update = new ModelPutTextNote();
@@ -155,14 +137,14 @@ KProgressHUD isloading;
                     done.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                           // ModelTextNotePost update = new ModelTextNotePost();
+                            // ModelTextNotePost update = new ModelTextNotePost();
                             update.setData(content.getText().toString());
                             update.setTitle(title.getText().toString());
                             update.setType(obj.getModelTextNote().getType());
-                            if(cardView.getCardBackgroundColor().getDefaultColor()==Color.parseColor(hex)){
+                            if (cardView.getCardBackgroundColor().getDefaultColor() == Color.parseColor(hex)) {
                                 Log.d("TAG", "onCreate:Color1: k thay đổi màu  ");
                                 update.setColor(new com.thinkdiffai.cloud_note.Model.Color(colorA, colorB, colorG, colorR));
-                            }else{
+                            } else {
                                 Log.d("TAG", "onCreate:Color2: thay đổi màu  ");
                                 update.setColor(ChuyenMauARGB(color_background));
                             }
@@ -170,15 +152,16 @@ KProgressHUD isloading;
                             update.setLock("");
                             update.setReminAt("");
                             update.setPinned(0);
-//                            if(tvDateCreate.getText().toString()==""&&tvTimeCreate.getText().toString()==""){
-//                                if(obj.getModelTextNote().getDuaAt()==""){
-//                                    update.setDuaAt("");
-//                                }else{
-//                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
-//                                }
-//                            }else{
-//                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
-//                            }
+                            if(tvDateCreate.getText().toString().isEmpty()&&tvTimeCreate.getText().toString().isEmpty()){
+                                if(obj.getModelTextNote().getDuaAt().isEmpty()){
+                                    update.setDuaAt("");
+                                }else{
+                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
+                                }
+                            }else{
+                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString()+" AM +07:00");
+                                Log.e("dua :",update.getDuaAt());
+                            }
                             updateNodeTextNote(update, idNote);
                         }
                     });
@@ -188,7 +171,7 @@ KProgressHUD isloading;
 
             @Override
             public void onFailure(Call<ModelGetNoteText> call, Throwable t) {
-                Log.e("TAG", "onFailure: "+t.getMessage() );
+                Log.e("TAG", "onFailure: " + t.getMessage());
                 isloading.dismiss();
             }
         });
@@ -205,20 +188,20 @@ KProgressHUD isloading;
             }
         });
         Back();
-
-//        OpenMenu();
+        OpenMenu();
     }
 
-    private void getData(Intent intent){
+    private void getData(Intent intent) {
         idNote = intent.getIntExtra("id", -1);
-        colorA = intent.getFloatExtra("colorA",0);
+        colorA = intent.getFloatExtra("colorA", 0);
         colorR = intent.getIntExtra("colorR", 0);
         colorG = intent.getIntExtra("colorG", 0);
         colorB = intent.getIntExtra("colorB", 0);
-        notePublic = intent.getIntExtra("notePublic",0);
+        notePublic = intent.getIntExtra("notePublic", 0);
 
 
     }
+
     private void updateNodeTextNote(ModelPutTextNote obj, int id) {
         isloading.show();
         ModelReturn modelR = new ModelReturn();
@@ -245,7 +228,7 @@ KProgressHUD isloading;
                     @Override
                     public void onComplete() {
                         isloading.dismiss();
-                        Toast.makeText(Detail_Note.this, modelR.getMessage() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Detail_Note.this, modelR.getMessage(), Toast.LENGTH_SHORT).show();
                         onBackPressed();
 
                         if (modelR.getStatus() == 200) {
@@ -254,6 +237,7 @@ KProgressHUD isloading;
                     }
                 });
     }
+
     private String ChuyenMau(float alpha, float red, float green, float blue) {
         // chuyển đổi giá trị của từng kênh màu sang giá trị thập lục phân
         String alphaHex = Integer.toHexString((int) alpha);
@@ -265,7 +249,8 @@ KProgressHUD isloading;
         Log.d("TAG", "ChuyenMau: " + hex);
         return hex;
     }
-    public com.thinkdiffai.cloud_note.Model.Color ChuyenMauARGB (String hexColor){
+
+    public com.thinkdiffai.cloud_note.Model.Color ChuyenMauARGB(String hexColor) {
         int red = Integer.parseInt(hexColor.substring(1, 3), 16);
         int green = Integer.parseInt(hexColor.substring(3, 5), 16);
         int blue = Integer.parseInt(hexColor.substring(5, 7), 16);
@@ -278,7 +263,7 @@ KProgressHUD isloading;
     }
 
 
-    public void Back(){
+    public void Back() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -286,7 +271,8 @@ KProgressHUD isloading;
             }
         });
     }
-    public void OpenMenu(){
+
+    public void OpenMenu() {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,7 +280,8 @@ KProgressHUD isloading;
             }
         });
     }
-    public void Menu_Dialog(int gravity){
+
+    public void Menu_Dialog(int gravity) {
         final Dialog dialog = new Dialog(this);
         //Truyền layout cho dialog.
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -303,7 +290,7 @@ KProgressHUD isloading;
         //Xác định vị trí cho dialog
 
         Window window = dialog.getWindow();
-        if(window == null){
+        if (window == null) {
 
         }
 
@@ -314,18 +301,18 @@ KProgressHUD isloading;
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
-        if(Gravity.BOTTOM == gravity){
+        if (Gravity.BOTTOM == gravity) {
             dialog.setCancelable(true);
-        }else {
+        } else {
             dialog.setCancelable(false);
         }
         //Ánh xạ
-        RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
+        RelativeLayout Rl_reminder, Rl_share, Rl_lock, Rl_archive, Rl_deletenote;
         Rl_reminder = dialog.findViewById(R.id.Rl_Reminder);
         Rl_share = dialog.findViewById(R.id.Rl_share);
         Rl_lock = dialog.findViewById(R.id.Rl_lock);
         Rl_archive = dialog.findViewById(R.id.Rl_archive);
-        Rl_deletenote = dialog.findViewById(R.id.Rl_deletenote);
+        Rl_deletenote = dialog.findViewById(R.id.Rl_delete);
         ImageButton red = dialog.findViewById(R.id.color_red);
         ImageButton orange = dialog.findViewById(R.id.color_orange);
         ImageButton yellow = dialog.findViewById(R.id.color_yellow);
@@ -406,8 +393,9 @@ KProgressHUD isloading;
         });
         dialog.show();
     }
-    private void dialogDelete( int id) {
-       final Dialog dialog1 = new Dialog(this);
+
+    private void dialogDelete(int id) {
+        final Dialog dialog1 = new Dialog(this);
         dialog1.setContentView(R.layout.dialog_delete_note);
         Button btn_cancel = dialog1.findViewById(R.id.btn_cancel);
         Button btn_delete = dialog1.findViewById(R.id.btn_delete);
@@ -469,73 +457,7 @@ KProgressHUD isloading;
         });
         dialog1.show();
     }
-    private void nhanMau(){
-        red.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FF7D7D";
 
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        orange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FFBC7D";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        yellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FAE28C";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        green1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#D3EF82";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        green2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#A5EF82";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        mint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#82EFBB";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        blue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#82C8EF";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        purple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#8293EF";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-
-            }
-        });
-    }
     public void dialogDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -545,7 +467,7 @@ KProgressHUD isloading;
                 int days = dayOfMonth;
                 int months = month;
                 int years = year;
-                tvDateCreate.setText(days + "-" + (months + 1) + "-" + years);
+                tvDateCreate.setText(days + "/" + (months + 1) + "/" + years);
             }
         }, calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -553,6 +475,7 @@ KProgressHUD isloading;
         );
         datePickerDialog.show();
     }
+
     public void dialogTime() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -568,7 +491,8 @@ KProgressHUD isloading;
         }, hourOfDay, minute, false);
         timePickerDialog.show();
     }
-    public void dialogArchived(){
+
+    public void dialogArchived() {
         final Dialog dialog1 = new Dialog(this);
         dialog1.setContentView(R.layout.dialog_confirm);
         Button btn_cancel = dialog1.findViewById(R.id.btn_cancle);
@@ -603,6 +527,8 @@ KProgressHUD isloading;
 //                onBackPressed();
 //            }
 //        });
+        dialog1.show();
     }
+
 
 }
