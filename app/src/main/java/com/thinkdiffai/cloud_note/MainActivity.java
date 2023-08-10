@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.groups).setChecked(true);
                         btnAdd.setVisibility(View.VISIBLE);
+
                         break;
                     default:
                         bottomNavigationView.getMenu().findItem(R.id.note).setChecked(true);
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.note:
                         viewpager2.setCurrentItem(0);
+
                         btnAdd.setImageResource(R.drawable.add);
                         return true;
                     case R.id.calendar:

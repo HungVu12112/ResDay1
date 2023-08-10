@@ -23,20 +23,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="45dp">
+                android:layout_marginTop="45dp"
+                android:orientation="horizontal">
+
                 <ImageButton
                     android:id="@+id/screenShot"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/baseline_settings_24" />
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/roboto_medium"
                     android:text="MY NOTE"
 
@@ -48,9 +50,9 @@
                 <ImageButton
                     android:id="@+id/preferences"
                     android:layout_width="24dp"
-                    android:layout_marginRight="30dp"
                     android:layout_height="24dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="30dp"
                     android:background="@drawable/preferences_light" />
             </LinearLayout>
 
@@ -63,12 +65,11 @@
                 app:cardElevation="10dp">
 
                 <SearchView
+                    android:id="@+id/search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/search"
                     android:iconifiedByDefault="false"
-                    android:queryHint="Tìm kiếm tiêu đề"
-                    />
+                    android:queryHint="Search"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -85,8 +86,8 @@
                 android:id="@+id/recycler_View"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/custom_layout" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

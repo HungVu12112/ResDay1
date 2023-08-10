@@ -56,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/search"
                     android:iconifiedByDefault="false"
-                    android:queryHint="Tìm kiếm group"
+                    android:queryHint="Search"
+
                     />
             </androidx.cardview.widget.CardView>
 

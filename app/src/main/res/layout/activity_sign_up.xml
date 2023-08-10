@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp"
-    android:background="@drawable/bg3"
-    tools:context=".SignUpActivity">
+    android:background="@drawable/bg3">
     <ImageView
         android:id="@+id/img_back"
         android:layout_width="30dp"
@@ -18,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
+
         android:textColor="#6A53CC"
         android:textSize="40dp"
         android:textStyle="bold"

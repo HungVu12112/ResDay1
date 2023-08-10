@@ -32,11 +32,10 @@ import com.thinkdiffai.cloud_note.Model.GET.ModelGetImageNote;
 import com.thinkdiffai.cloud_note.Model.GET.ModelGetNoteText;
 import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
 import com.thinkdiffai.cloud_note.Model.Model_List_Note;
-import com.thinkdiffai.cloud_note.TextNoteActvity;
+
+import java.util.List;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +68,7 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.ViewHoderItemN
     public void onBindViewHolder(@NonNull ViewHoderItemNote holder, int position) {
         final int index = position;
         Model_List_Note list_note = list.get(index);
+
         Log.e("TAG", "onBindViewHolder: IdNote" + list_note.getCreateAt());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss ");
         holder.titleHeader.setText(list_note.getTitle());

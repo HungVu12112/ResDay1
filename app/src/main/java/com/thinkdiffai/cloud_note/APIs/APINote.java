@@ -83,7 +83,6 @@ public interface APINote {
             "Content-type: Application/json"
     })
     Call<Objects> getListNoteByUser2(@Path("id") int id);
-    ///
     @POST("notes/{id}")
     @Headers({
             "Content-type: Application/json"
@@ -100,15 +99,12 @@ public interface APINote {
             "Content-type: Application/json"
     })
     Observable<ModelReturn> post_image_note(@Path("id") int id , @Body ModelPostImageNote modelPostImageNote);
-    //
+
     @PATCH("notes/{id}")
     @Headers({
             "Content-type: Application/json"
     })
     Observable<ModelReturn> patch_text_note(@Path("id") int id, @Body ModelPutTextNote modelPutTextNote);
-
-
-
 
     @PATCH("notes/{id}")
     @Headers({

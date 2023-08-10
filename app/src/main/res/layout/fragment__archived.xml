@@ -36,16 +36,10 @@
                     android:textFontWeight="1000"
                     android:textSize="30dp"
                     android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/btnSetting"
-                    android:layout_width="24dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/preferences_light" />
             </LinearLayout>
 
+
+            
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,18 +49,13 @@
                 app:cardElevation="10dp">
 
                 <SearchView
-                    android:id="@+id/seach_edittxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/custom_edittext"
-                    android:drawableLeft="@drawable/vector"
-                    android:fontFamily="@font/roboto_medium"
-                    android:hint="Search"
-                    android:lineHeight="32dp"
+                    android:id="@+id/search"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search"
+                    />
 
-                    android:paddingLeft="10dp"
-                    android:textColorHint="#626F86"
-                    android:textSize="15dp" />
 
             </androidx.cardview.widget.CardView>
 

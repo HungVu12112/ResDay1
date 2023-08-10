@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
         android:gravity="center"
-        android:text="Image"
+        android:text="@string/ocr_camera_text"
         android:fontFamily="@font/roboto_medium"
         android:textAllCaps="false"
         android:textColor="#007AFF"

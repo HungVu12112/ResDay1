@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginHorizontal="10dp"
-        android:gravity="center"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -17,42 +18,49 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ellipse5" />
+
         <ImageButton
             android:id="@+id/color_orange"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse6" />
+
         <ImageButton
             android:id="@+id/color_yellow"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse7" />
+
         <ImageButton
             android:id="@+id/color_green1"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse8" />
+
         <ImageButton
             android:id="@+id/color_green2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse9" />
+
         <ImageButton
             android:id="@+id/color_mint"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse10" />
+
         <ImageButton
             android:id="@+id/color_blue"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse11" />
+
         <ImageButton
             android:id="@+id/color_purple"
             android:layout_width="30dp"
@@ -60,12 +68,14 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/ellipse12" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/Rl_Reminder"
             android:layout_width="wrap_content"
@@ -79,12 +89,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reminder"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Reminder"
                 android:textColor="@color/black"
-                android:layout_marginLeft="40dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Rl_share"
             android:layout_width="wrap_content"
@@ -100,12 +111,13 @@
                 android:id="@+id/tv_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Share"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Share"
                 android:textColor="@color/black"
-                android:layout_marginLeft="40dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Rl_lock"
             android:layout_width="wrap_content"
@@ -120,12 +132,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lock"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Lock"
                 android:textColor="@color/black"
-                android:layout_marginLeft="40dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Rl_archive"
             android:layout_width="wrap_content"
@@ -140,14 +153,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Archive"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Archive"
                 android:textColor="@color/black"
-                android:layout_marginLeft="40dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Rl_deletenote"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -161,11 +176,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete note"
-                android:textSize="15dp"
+                android:layout_marginLeft="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Delete note"
                 android:textColor="@color/black"
-                android:layout_marginLeft="40dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
 
     </LinearLayout>

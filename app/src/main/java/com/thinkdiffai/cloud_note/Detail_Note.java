@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +17,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,6 +35,8 @@ import com.example.cloud_note.R;
 import com.thinkdiffai.cloud_note.APIs.APINote;
 import com.thinkdiffai.cloud_note.Model.GET.ModelGetNoteText;
 import com.thinkdiffai.cloud_note.Model.GET.ModelReturn;
+import com.thinkdiffai.cloud_note.Model.PATCH.ModelPutTextNote;
+
 import com.thinkdiffai.cloud_note.Model.Model_List_Note;
 import com.thinkdiffai.cloud_note.Model.PATCH.ModelPutTextNote;
 
@@ -61,6 +67,7 @@ public class Detail_Note extends AppCompatActivity {
     private ImageView imgTimeCreate;
     List<Model_List_Note> list;
 
+
     //Luu tru gia tri duoc gui boi bundle
 
     int idNote;
@@ -70,8 +77,6 @@ public class Detail_Note extends AppCompatActivity {
     int colorB;
     int notePublic;
 
-    private ImageButton red,orange,yellow,green1,green2,mint,blue,purple;
-    private RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
 
 
     //Database
@@ -96,30 +101,8 @@ KProgressHUD isloading;
         tvTimeCreate = (TextView) findViewById(R.id.tv_timeCreate);
         imgTimeCreate = (ImageView) findViewById(R.id.img_timeCreate);
 
-        red = findViewById(R.id.color_red);
-        orange = findViewById(R.id.color_orange);
-        yellow = findViewById(R.id.color_yellow);
-        green1 = findViewById(R.id.color_green1);
-        green2 = findViewById(R.id.color_green2);
-        mint = findViewById(R.id.color_mint);
-        blue = findViewById(R.id.color_blue);
-        purple = findViewById(R.id.color_purple);
-        Rl_reminder = findViewById(R.id.Rl_Reminder);
-        Rl_share = findViewById(R.id.Rl_share);
-        Rl_lock = findViewById(R.id.Rl_lock);
-        Rl_archive = findViewById(R.id.Rl_archive);
-        Rl_deletenote = findViewById(R.id.Rl_deletenote);
-        nhanMau();
         getData(intent);
 
-
-        Rl_deletenote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ////
-                dialogDelete(idNote);
-            }
-        });
         if(notePublic==0){
             done.setVisibility(View.VISIBLE);
             menu.setVisibility(View.VISIBLE);
@@ -170,15 +153,16 @@ KProgressHUD isloading;
                             update.setLock("");
                             update.setReminAt("");
                             update.setPinned(0);
-//                            if(tvDateCreate.getText().toString()==""&&tvTimeCreate.getText().toString()==""){
-//                                if(obj.getModelTextNote().getDuaAt()==""){
-//                                    update.setDuaAt("");
-//                                }else{
-//                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
-//                                }
-//                            }else{
-//                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
-//                            }
+                            if(tvDateCreate.getText().toString()==""&&tvTimeCreate.getText().toString()==""){
+                                if(obj.getModelTextNote().getDuaAt()==""){
+                                    update.setDuaAt("");
+                                }else{
+                                    update.setDuaAt(obj.getModelTextNote().getDuaAt());
+                                }
+                            }else{
+                                update.setDuaAt(tvDateCreate.getText().toString()+" "+tvTimeCreate.getText().toString());
+                            }
+
                             updateNodeTextNote(update, idNote);
                         }
                     });
@@ -192,21 +176,9 @@ KProgressHUD isloading;
                 isloading.dismiss();
             }
         });
-        imgDateCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogDate();
-            }
-        });
-        imgTimeCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogTime();
-            }
-        });
         Back();
 
-//        OpenMenu();
+        OpenMenu();
     }
 
     private void getData(Intent intent){
@@ -334,12 +306,14 @@ KProgressHUD isloading;
         ImageButton mint = dialog.findViewById(R.id.color_mint);
         ImageButton blue = dialog.findViewById(R.id.color_blue);
         ImageButton purple = dialog.findViewById(R.id.color_purple);
+
         Rl_deletenote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogDelete(idNote);
             }
         });
+
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -406,6 +380,7 @@ KProgressHUD isloading;
         });
         dialog.show();
     }
+
     private void dialogDelete( int id) {
        final Dialog dialog1 = new Dialog(this);
         dialog1.setContentView(R.layout.dialog_delete_note);
@@ -468,73 +443,6 @@ KProgressHUD isloading;
 
         });
         dialog1.show();
-    }
-    private void nhanMau(){
-        red.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FF7D7D";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        orange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FFBC7D";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        yellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#FAE28C";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        green1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#D3EF82";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        green2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#A5EF82";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        mint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#82EFBB";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        blue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#82C8EF";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-            }
-        });
-        purple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                color_background = "#8293EF";
-
-                cardView.setCardBackgroundColor(Color.parseColor(color_background));
-
-            }
-        });
     }
     public void dialogDate() {
         Calendar calendar = Calendar.getInstance();
