@@ -169,21 +169,21 @@ public class Fragment_Home extends Fragment {
                         buttonSortby.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-//                                List<Model_List_Note> listSort = sort(sort.getSortName(), note.getList());
-//                                Log.e("TAG", "onClick: sắp sếp theo ngày " );
-//                                adapterNote = new AdapterNote(listSort, true);
-//                                recyclerView.setAdapter(adapterNote);
+                                List<Model_List_Note> listSort = sort(sort.getSortName(), list);
+                                Log.e("TAG", "onClick: sắp sếp theo ngày " );
+                                adapterNote = new AdapterNote(listSort, true);
+                                recyclerView.setAdapter(adapterNote);
 
 
-//                                if(isSort==true){
-//
-//
-//                                }else {
-//                                    isSort=true;
-//                                    Log.e("TAG", "onClick: list đầu " );
-//                                    adapterNote = new AdapterNote(note.getList(), true);
-//                                    recyclerView.setAdapter(adapterNote);
-//                                }
+                                if(isSort==true){
+
+
+                                }else {
+                                    isSort=true;
+                                    Log.e("TAG", "onClick: list đầu " );
+                                    adapterNote = new AdapterNote(note.getList(), true);
+                                    recyclerView.setAdapter(adapterNote);
+                                }
 
                             }
                         });
@@ -218,11 +218,11 @@ public class Fragment_Home extends Fragment {
         List<Model_List_Note> listQuery = new ArrayList<>();
         for (int i=0;i< list.size();i++){
             if(list.get(i).getType().equalsIgnoreCase("image")||list.get(i).getType().equalsIgnoreCase("text")){
-                if(list.get(i).getTitle().toLowerCase().contains(query.toLowerCase())){
+                if(list.get(i).getTitle().toLowerCase().contains(query.toLowerCase()) || list.get(i).getCreateAt().toLowerCase().contains(query.toLowerCase())){
                     listQuery.add(list.get(i));
                 }
             }else if(list.get(i).getType().equalsIgnoreCase("checklist")){
-                if(list.get(i).getTitle().toLowerCase().contains(query.toLowerCase())){
+                if(list.get(i).getTitle().toLowerCase().contains(query.toLowerCase()) || list.get(i).getCreateAt().toLowerCase().contains(query.toLowerCase())){
                     listQuery.add(list.get(i));
                 }
             }

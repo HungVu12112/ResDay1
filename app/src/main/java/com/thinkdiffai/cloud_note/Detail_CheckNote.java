@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,8 @@ public class Detail_CheckNote extends AppCompatActivity {
     AdapterCheckList adapterCheckList;
     private ImageButton btnDetailChecklistDone;
     private Button btnAddCheckList;
+    private ImageButton red,orange,yellow,green1,green2,mint,blue,purple;
+    private RelativeLayout Rl_reminder,Rl_share,Rl_lock,Rl_archive,Rl_deletenote;
 KProgressHUD isloading;
     List<ModelCheckListPost> checkListUpdate = new ArrayList<>();
     int notePublic;
@@ -82,6 +85,38 @@ KProgressHUD isloading;
         menuDetailCheckList = (ImageButton) findViewById(R.id.menu_detail_check_list);
         btnDetailChecklistDone = (ImageButton) findViewById(R.id.btn_detail_checklist_done);
         btnAddCheckList = (Button) findViewById(R.id.btn_addCheckList);
+
+
+        red = findViewById(R.id.color_red);
+        orange = findViewById(R.id.color_orange);
+        yellow = findViewById(R.id.color_yellow);
+        green1 = findViewById(R.id.color_green1);
+        green2 = findViewById(R.id.color_green2);
+        mint = findViewById(R.id.color_mint);
+        blue = findViewById(R.id.color_blue);
+        purple = findViewById(R.id.color_purple);
+        Rl_reminder = findViewById(R.id.Rl_Reminder);
+        Rl_share = findViewById(R.id.Rl_share);
+        Rl_lock = findViewById(R.id.Rl_lock);
+        Rl_archive = findViewById(R.id.Rl_archive);
+        Rl_deletenote = findViewById(R.id.Rl_deletenote);
+        nhanMau();
+
+        Rl_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,title.getText().toString());
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+        Rl_deletenote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogDelete(idNote);
+            }
+        });
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         getData(intent);
@@ -387,5 +422,135 @@ KProgressHUD isloading;
             }
         });
         dialog.show();
+    }
+    private void nhanMau(){
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FF7D7D";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        orange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FFBC7D";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        yellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#FAE28C";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        green1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#D3EF82";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        green2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#A5EF82";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        mint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#82EFBB";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#82C8EF";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+            }
+        });
+        purple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color_background = "#8293EF";
+
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
+
+            }
+        });
+    }
+    private void dialogDelete( int id) {
+        final Dialog dialog1 = new Dialog(this);
+        dialog1.setContentView(R.layout.dialog_delete_note);
+        Button btn_cancel = dialog1.findViewById(R.id.btn_cancel);
+        Button btn_delete = dialog1.findViewById(R.id.btn_delete);
+        Button btn_move_trash = dialog1.findViewById(R.id.btn_move_trash);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog1.dismiss();
+            }
+        });
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APINote.apiService.deleteNote(id).enqueue(new Callback<ModelReturn>() {
+                    @Override
+                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+                        if (response.isSuccessful() & response.body() != null) {
+                            ModelReturn r = response.body();
+                            if (r.getStatus() == 200) {
+                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+                onBackPressed();
+            }
+        });
+        btn_move_trash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APINote.apiService.moveToTrash(id).enqueue(new Callback<ModelReturn>() {
+                    @Override
+                    public void onResponse(Call<ModelReturn> call, Response<ModelReturn> response) {
+                        if (response.isSuccessful() & response.body() != null) {
+                            ModelReturn r = response.body();
+                            if (r.getStatus() == 200) {
+                                Toast.makeText(getApplicationContext(), r.getMessage(), Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelReturn> call, Throwable t) {
+                        Log.e("TAG", "onFailure: " + t.getMessage());
+                    }
+                });
+                onBackPressed();
+            }
+
+        });
+        dialog1.show();
     }
 }

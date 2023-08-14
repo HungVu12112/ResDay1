@@ -86,7 +86,7 @@ public class CheckedList_Activity extends AppCompatActivity {
         daoLogin = new Login(CheckedList_Activity.this);
         user = daoLogin.getLogin();
         Save();
-        OpenMenu();
+//        OpenMenu();
         adapterCheckList = new AdapterCheckListPost(list);
         rcvCheckList.setAdapter(adapterCheckList);
       isloading = new KProgressHUD(CheckedList_Activity.this)
@@ -169,6 +169,7 @@ public class CheckedList_Activity extends AppCompatActivity {
         Rl_share = findViewById(R.id.Rl_share);
         Rl_lock = findViewById(R.id.Rl_lock);
         Rl_archive = findViewById(R.id.Rl_archive);
+        Rl_deletenote = findViewById(R.id.Rl_deletenote);
         nhanMau();
     }
 

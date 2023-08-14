@@ -112,12 +112,28 @@ KProgressHUD isloading;
         nhanMau();
         getData(intent);
 
-
+        Rl_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ////
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, content.getText().toString());
+                startActivity(Intent.createChooser(shareIntent, title.getText().toString()));
+            }
+        });
         Rl_deletenote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ////
                 dialogDelete(idNote);
+            }
+        });
+        Rl_reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /// Cài đặt thông báo nhắc nhở người dùng
+
             }
         });
         if(notePublic==0){
@@ -334,6 +350,8 @@ KProgressHUD isloading;
         ImageButton mint = dialog.findViewById(R.id.color_mint);
         ImageButton blue = dialog.findViewById(R.id.color_blue);
         ImageButton purple = dialog.findViewById(R.id.color_purple);
+        ///share note
+
         Rl_deletenote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

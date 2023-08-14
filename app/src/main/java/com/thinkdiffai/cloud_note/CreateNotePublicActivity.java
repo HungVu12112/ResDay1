@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -129,6 +130,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
         titleImage = (EditText) findViewById(R.id.title_image);
         addContentImage = (EditText) findViewById(R.id.add_content_image);
         menuTextNote = (ImageButton) findViewById(R.id.menu_text_note);
+        cardView = findViewById(R.id.card_View);
 
         backFromCheckNote = (ImageButton) findViewById(R.id.back_from_check_note);
         btnChecklistDone = (ImageButton) findViewById(R.id.btn_checklist_done);
@@ -663,7 +665,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#FF7D7D";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -672,7 +674,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#FFBC7D";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -681,7 +683,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#FAE28C";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -690,7 +692,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#D3EF82";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -699,7 +701,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#A5EF82";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -708,7 +710,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#82EFBB";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -717,7 +719,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#82C8EF";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });
@@ -726,7 +728,7 @@ public class CreateNotePublicActivity extends AppCompatActivity {
             public void onClick(View view) {
                 color_background = "#8293EF";
 
-                cardView.setCardBackgroundColor(android.graphics.Color.parseColor(color_background));
+                cardView.setCardBackgroundColor(Color.parseColor(color_background));
                 dialog.cancel();
             }
         });

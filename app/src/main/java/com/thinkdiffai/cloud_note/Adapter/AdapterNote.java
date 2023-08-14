@@ -235,6 +235,12 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.ViewHoderItemN
                         context.startActivity(intent);
                     }
                 });
+                holder.RecyclerCardview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        context.startActivity(intent);
+                    }
+                });
             } else if (home == false) {
                 holder.imgActive1.setImageResource(R.drawable.baseline_restore_24);
                 holder.imgActive1.setOnClickListener(new View.OnClickListener() {
@@ -301,6 +307,12 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.ViewHoderItemN
                 holder.imgInfor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        context.startActivity(intent);
+                    }
+                });
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                         context.startActivity(intent);
                     }
                 });

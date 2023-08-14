@@ -117,6 +117,8 @@ private static final String TAG="LoginActivity";
                         hud.dismiss();
                         Log.e("TAG", "onError: " + e);
                         inputPasswd.setError("Sai mật khẩu");
+                        Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override
