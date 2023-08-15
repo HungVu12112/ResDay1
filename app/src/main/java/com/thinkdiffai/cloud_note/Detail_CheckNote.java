@@ -113,7 +113,7 @@ KProgressHUD isloading;
                 isloading.show();
                 if (response.body() != null && response.isSuccessful()) {
                     isloading.dismiss();
-                    obj.setModelTextNote12CheckList(response.body().getModelTextNoteCheckList());
+                    obj.setModelTextNoteCheckList(response.body().getModelTextNoteCheckList());
                     title.setText(obj.getModelTextNoteCheckList().getTitle());
                     adapterCheckList = new AdapterCheckList(obj.getModelTextNoteCheckList().getData(), true);
                     recyclerView.setAdapter(adapterCheckList);
